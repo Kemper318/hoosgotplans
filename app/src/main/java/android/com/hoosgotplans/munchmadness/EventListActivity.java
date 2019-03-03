@@ -1,10 +1,12 @@
 package android.com.hoosgotplans.munchmadness;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class EventListActivity extends AppCompatActivity {
 
     private RecyclerView eventListView;
     private List<Event> eventList;
+    private Button newEventButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +27,15 @@ public class EventListActivity extends AppCompatActivity {
         eventList = getEvents();
 
         eventListView = findViewById(R.id.event_list_view);
+
+        newEventButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent startNewEventIntent = new Intent(getBaseContext(), NewEventActivity.class);
+                startActivity(startNewEventIntent);
+            }
+        });
     }
-
-
-/*    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // Get event that was clicked on.
-        Event event = eventList.get(position);
-
-        // Open the detail view for that event.
-    }*/
 
     public List<Event> getEvents() {
         return new ArrayList<>();
